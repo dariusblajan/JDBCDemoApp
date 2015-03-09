@@ -165,7 +165,6 @@ public class DemoCRUDOperations {
 
         // 4. create a query statement
         PreparedStatement pSt = conn.prepareStatement("UPDATE agenda SET name=?, phone=? WHERE id_agenda=?"); //so we have 3 params
-        //pSt.setString(1, "nicu");
         pSt.setString(1, name);
         pSt.setString(2, phoneNo);
         pSt.setLong(3, key);
@@ -189,20 +188,21 @@ public class DemoCRUDOperations {
         final String USERNAME = "fasttrackit_dev";
         final String PASSWORD = "fasttrackit_dev";
         Scanner read = new Scanner(System.in);
-        Long key;
-        System.out.print("id to be deleted: ");
-        key=read.nextLong();
+        String name ;
+        System.out.print("name to be deleted: ");
+        name=read.nextLine();
 
         // 3. obtain a connection
         Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
         // 4. create a query statement
-        PreparedStatement pSt = conn.prepareStatement("DELETE FROM agenda WHERE id_agenda=?");
-        pSt.setLong(1, key);
+        PreparedStatement pSt = conn.prepareStatement("DELETE FROM agenda WHERE name=?");
+        pSt.setString(1, name);
 
         // 5. execute a prepared statement
         int rowsDeleted = pSt.executeUpdate();
         System.out.println(rowsDeleted + " rows were deleted.");
+        
         // 6. close the objects
         pSt.close();
         conn.close();
